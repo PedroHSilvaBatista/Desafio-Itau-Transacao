@@ -3,15 +3,17 @@ package desafio.itau.transacao.repositories;
 import desafio.itau.transacao.entities.Transacao;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class TransacaoRepository {
-    private List<Transacao> transacoes;
+    private final List<Transacao> transacoes = new ArrayList<>();
 
     // POST
-    public void salvarTransacao(Transacao transacao, List<Transacao> transacoes) {
-
+    public void salvarTransacao(Transacao transacao) {
+        transacoes.add(transacao);
+        System.out.println(transacoes);
     }
 
     // DELETE
