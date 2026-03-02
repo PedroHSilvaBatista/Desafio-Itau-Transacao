@@ -16,4 +16,8 @@ public class TransacaoService {
         Transacao transacao = TransacaoMapper.toEntity(request);
         repository.salvarTransacao(transacao);
     }
+
+    public void apagarTodasTransacoes() {
+        repository.apagarTransacoes();
+    }
 }

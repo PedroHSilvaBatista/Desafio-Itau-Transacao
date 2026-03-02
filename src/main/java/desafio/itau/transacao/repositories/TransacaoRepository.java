@@ -17,8 +17,9 @@ public class TransacaoRepository {
     }
 
     // DELETE
-    public void apagarTransacoes(List<Transacao> transacoes) {
-
+    public void apagarTransacoes() {
+        transacoes.clear();
+        System.out.println(transacoes);
     }
 
     // Implementar o GET
