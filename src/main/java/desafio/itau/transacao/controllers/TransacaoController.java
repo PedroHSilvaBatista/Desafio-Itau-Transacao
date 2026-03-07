@@ -1,5 +1,6 @@
 package desafio.itau.transacao.controllers;
 
+import desafio.itau.transacao.dtos.EstatisticaResponse;
 import desafio.itau.transacao.dtos.TransacaoRequest;
 import desafio.itau.transacao.services.TransacaoService;
 import jakarta.validation.Valid;
@@ -24,5 +25,11 @@ public class TransacaoController {
     public ResponseEntity apagarTodasTransacoes() {
         service.apagarTodasTransacoes();
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping
+    public ResponseEntity<EstatisticaResponse> calcularEstatisticas() {
+        EstatisticaResponse estatisticas = service.calcularEstatisticas();
+        return ResponseEntity.ok(estatisticas);
     }
 }

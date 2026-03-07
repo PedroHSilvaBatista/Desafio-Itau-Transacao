@@ -19,4 +19,12 @@ public class Transacao {
     public String toString() {
         return "{Valor: " +  valor  + "; dataHora: " + dataHora +  "}";
     }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public OffsetDateTime getDataHora() {
+        return dataHora;
+    }
 }
