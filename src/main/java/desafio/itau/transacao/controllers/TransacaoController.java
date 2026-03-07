@@ -27,7 +27,7 @@ public class TransacaoController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @GetMapping
+    @GetMapping("/estatistica")
     public ResponseEntity<EstatisticaResponse> calcularEstatisticas() {
         EstatisticaResponse estatisticas = service.calcularEstatisticas();
         return ResponseEntity.ok(estatisticas);
