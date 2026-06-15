@@ -48,7 +48,6 @@ class TransacaoServiceTest {
             // ACT
             transacaoService.salvarTransacao(transacaoRequest);
 
-
             // ASSERT
             mocked.verify(() -> TransacaoMapper.toEntity(any(TransacaoRequest.class)));
             Mockito.verify(transacaoRepository).salvarTransacao(transacao);
