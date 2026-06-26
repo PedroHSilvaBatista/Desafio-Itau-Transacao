@@ -1,0 +1,5 @@
+CREATE TABLE transacoes (
+    id BIGSERIAL PRIMARY KEY,
+    valor NUMERIC NOT NULL,
+    data_hora TIMESTAMPTZ NOT NULL
+)
