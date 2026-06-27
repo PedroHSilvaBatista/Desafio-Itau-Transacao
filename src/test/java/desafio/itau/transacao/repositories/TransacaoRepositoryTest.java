@@ -8,13 +8,11 @@ import org.junit.jupiter.api.Test;
 
 import java.time.OffsetDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class TransacaoRepositoryTest {
     @Test
     void deveriaSalvarTransacao() {
         // ARRANGE
-        TransacaoRepository transacaoRepository = new TransacaoRepository();
+        TransacaoRepositoryDescomissionada transacaoRepository = new TransacaoRepositoryDescomissionada();
         Transacao transacao = new Transacao(200, OffsetDateTime.now());
 
         // ACT
@@ -28,7 +26,7 @@ class TransacaoRepositoryTest {
     @Test
     void deveriaApagarTransacao() {
         // ARRANGE
-        TransacaoRepository transacaoRepository = new TransacaoRepository();
+        TransacaoRepositoryDescomissionada transacaoRepository = new TransacaoRepositoryDescomissionada();
         Transacao transacao = new Transacao(200, OffsetDateTime.now());
 
         // ACT
@@ -43,7 +41,7 @@ class TransacaoRepositoryTest {
     @Test
     void deveriaRetornarEstatistica() {
         // ARRANGE
-        TransacaoRepository transacaoRepository = new TransacaoRepository();
+        TransacaoRepositoryDescomissionada transacaoRepository = new TransacaoRepositoryDescomissionada();
         Transacao transacao = new Transacao(200, OffsetDateTime.now());
 
         // ACT - Sugestão: Separar cada cenário em um teste independente
@@ -61,7 +59,7 @@ class TransacaoRepositoryTest {
     @Test
     void naoDeveriaRetornarEstatisticasParaTransacoesRemovidas() {
         // ARRANGE
-        TransacaoRepository transacaoRepository = new TransacaoRepository();
+        TransacaoRepositoryDescomissionada transacaoRepository = new TransacaoRepositoryDescomissionada();
         Transacao transacao = new Transacao(200, OffsetDateTime.now());
 
         // ACT
@@ -80,7 +78,7 @@ class TransacaoRepositoryTest {
     @Test
     void naoDeveriaRetornarEstatisticasParaTransacoesPassadas() {
         // ARRANGE
-        TransacaoRepository transacaoRepository = new TransacaoRepository();
+        TransacaoRepositoryDescomissionada transacaoRepository = new TransacaoRepositoryDescomissionada();
         Transacao transacaoForaDoIntervalo = new Transacao(100, OffsetDateTime.parse("2026-05-24T15:30:45.123456789-03:00"));
 
         // ACT

@@ -6,7 +6,7 @@ import desafio.itau.transacao.entities.Estatistica;
 import desafio.itau.transacao.entities.Transacao;
 import desafio.itau.transacao.mappers.EstatisticaMapper;
 import desafio.itau.transacao.mappers.TransacaoMapper;
-import desafio.itau.transacao.repositories.TransacaoRepository;
+import desafio.itau.transacao.repositories.TransacaoRepositoryDescomissionada;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,7 +24,7 @@ class TransacaoServiceTest {
     private TransacaoService transacaoService;
 
     @Mock
-    private TransacaoRepository transacaoRepository;
+    private TransacaoRepositoryDescomissionada transacaoRepository;
 
     @Mock
     private Transacao transacao;
