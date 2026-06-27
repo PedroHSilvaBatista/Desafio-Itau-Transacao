@@ -21,6 +21,10 @@ public class Transacao {
         this.dataHora = dataHora;
     }
 
+    public Transacao() {
+
+    }
+
     @Override
     public String toString() {
         return "{Valor: " +  valor  + "; dataHora: " + dataHora +  "}";
