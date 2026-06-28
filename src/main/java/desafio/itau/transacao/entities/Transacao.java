@@ -16,6 +16,10 @@ public class Transacao {
     private double valor;
     private OffsetDateTime dataHora;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
     public Transacao(double valor, OffsetDateTime dataHora) {
         this.valor = valor;
         this.dataHora = dataHora;
