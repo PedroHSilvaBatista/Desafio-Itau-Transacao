@@ -19,6 +19,7 @@ public class Usuario {
     private String email;
     private String telefone;
     private String cpf;
+    private String senha;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -31,4 +32,14 @@ public class Usuario {
     public Usuario () {
 
     }
+
+    public Usuario (String nomeCompleto, String email, String telefone, String cpf, String senha, Role role) {
+        this.nomeCompleto = nomeCompleto;
+        this.email = email;
+        this.telefone = telefone;
+        this.cpf = cpf;
+        this.senha = senha;
+        this.role = role;
+    }
+
 }
