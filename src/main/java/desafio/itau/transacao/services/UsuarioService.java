@@ -8,12 +8,18 @@ import desafio.itau.transacao.exceptions.EmailValidacaoException;
 import desafio.itau.transacao.mappers.UsuarioMapper;
 import desafio.itau.transacao.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public UsuarioResponse cadastrarUsuario(UsuarioRequest request) {
 
@@ -27,8 +33,13 @@ public class UsuarioService {
 
         // Converte o request para entidade, define o login e persiste no banco
         Usuario usuario = UsuarioMapper.toEntity(request);
+        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         usuarioRepository.save(usuario);
 
         return UsuarioMapper.toResponse(usuario);
+    }
+
+    public Optional<Usuario> procurarUsuarioPorEmail(String email) {
+        return usuarioRepository.findByEmail(email);
     }
 }

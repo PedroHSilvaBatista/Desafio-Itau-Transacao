@@ -22,10 +22,10 @@ public class JwtService {
         return Keys.hmacShaKeyFor(secretKey.getBytes());
     }
 
-    public String gerarToken(String nomeUsuario, Role role) {
+    public String gerarToken(String emailUsuario, Role role) {
         return Jwts.builder()
                 .setClaims(Map.of("role", role))
-                .setSubject(nomeUsuario)
+                .setSubject(emailUsuario)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
                 .signWith(getChaveDeEntrada(), SignatureAlgorithm.HS256)
@@ -41,7 +41,7 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    public String extrairNomeUsuario(String token) {
+    public String extrairEmailUsuario(String token) {
         return extrairClaim(token, Claims::getSubject);
     }
 
@@ -50,7 +50,7 @@ public class JwtService {
     }
 
     public boolean validarToken(String token, String nomeUsuario) {
-        final String subject = extrairNomeUsuario(token);
+        final String subject = extrairEmailUsuario(token);
         return subject.equals(nomeUsuario) && !tokenExpirado(token);
     }
 }

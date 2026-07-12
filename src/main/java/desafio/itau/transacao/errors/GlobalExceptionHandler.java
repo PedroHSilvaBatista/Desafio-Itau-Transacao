@@ -2,6 +2,7 @@ package desafio.itau.transacao.errors;
 
 import desafio.itau.transacao.exceptions.CPFValidacaoException;
 import desafio.itau.transacao.exceptions.EmailValidacaoException;
+import desafio.itau.transacao.exceptions.RecursoNaoEncontradoException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
@@ -80,6 +81,16 @@ public class GlobalExceptionHandler {
 
         ProblemDetail pd = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
         pd.setTitle("O Email inserido já foi cadastrado");
+        pd.setProperty("Timestamp", OffsetDateTime.now());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(pd);
+    }
+
+    @ExceptionHandler(RecursoNaoEncontradoException.class)
+    public ResponseEntity<ProblemDetail> handleValidacaoRecursoNaoEncontrado(RecursoNaoEncontradoException ex) {
+        log.error("ERRO: Usuário não encontrado no banco de dados");
+
+        ProblemDetail pd = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
+        pd.setTitle("Email ou senha incorretos. Tente novamente");
         pd.setProperty("Timestamp", OffsetDateTime.now());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(pd);
     }
