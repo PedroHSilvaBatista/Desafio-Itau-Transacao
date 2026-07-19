@@ -11,7 +11,7 @@ public class CalculadoraEstatistica {
 
     public static Estatistica calcularEstatisticas(List<Transacao> transacoes) {
         OffsetDateTime agora = OffsetDateTime.now();
-        OffsetDateTime limite = agora.minusSeconds(60);
+        OffsetDateTime limite = agora.minusSeconds(300);
 
         DoubleSummaryStatistics stats = transacoes
                 .stream()

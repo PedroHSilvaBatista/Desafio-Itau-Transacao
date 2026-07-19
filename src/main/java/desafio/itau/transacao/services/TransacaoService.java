@@ -11,6 +11,9 @@ import desafio.itau.transacao.repositories.TransacaoRepository;
 import desafio.itau.transacao.utils.CalculadoraEstatistica;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +25,7 @@ public class TransacaoService {
     @Autowired
     private TransacaoRepository repository;
 
+    @CacheEvict(value = "TRANSACTION_CACHE", allEntries = true)
     public TransacaoResponse salvarTransacao(TransacaoRequest request) {
         Transacao transacao = TransacaoMapper.toEntity(request);
         log.info("Request transformado com sucesso para entidade: {}", transacao);
@@ -31,12 +35,14 @@ public class TransacaoService {
         return TransacaoMapper.toResponse(transacao);
     }
 
+    @CacheEvict(value = "TRANSACTION_CACHE", allEntries = true)
     public void apagarTodasTransacoes() {
         repository.deleteAll();
     }
 
+    @Cacheable(value = "TRANSACTION_CACHE")
     public EstatisticaResponse calcularEstatisticas() {
-        List<Transacao> transacoes = repository.findAll(); // Utilzar Redis depois
+        List<Transacao> transacoes = repository.findAll();
         return EstatisticaMapper.toResponse(CalculadoraEstatistica.calcularEstatisticas(transacoes));
     }
 }
