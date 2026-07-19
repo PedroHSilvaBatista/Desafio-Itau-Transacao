@@ -28,6 +28,7 @@ public class TransacaoService {
     @CacheEvict(value = "TRANSACTION_CACHE", allEntries = true)
     public TransacaoResponse salvarTransacao(TransacaoRequest request) {
         Transacao transacao = TransacaoMapper.toEntity(request);
+        log.info("Cache invalidado com sucesso");
         log.info("Request transformado com sucesso para entidade: {}", transacao);
         Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         transacao.setUsuario(usuario);
@@ -37,11 +38,13 @@ public class TransacaoService {
 
     @CacheEvict(value = "TRANSACTION_CACHE", allEntries = true)
     public void apagarTodasTransacoes() {
+        log.info("Limpeza de cache realizada com sucesso");
         repository.deleteAll();
     }
 
     @Cacheable(value = "TRANSACTION_CACHE")
     public EstatisticaResponse calcularEstatisticas() {
+        log.info("Cache miss - buscando estatísticas no banco de dados");
         List<Transacao> transacoes = repository.findAll();
         return EstatisticaMapper.toResponse(CalculadoraEstatistica.calcularEstatisticas(transacoes));
     }
