@@ -3,3 +3,11 @@ services:
     image: redis:7.4
     ports:
       - "6379:6379"
+  mongodb:
+    image: mongo:8.3.8
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${USERNAME_MONGODB}
+      MONGO_INITDB_ROOT_PASSWORD: ${PASSWORD_MONGODB}
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE}
